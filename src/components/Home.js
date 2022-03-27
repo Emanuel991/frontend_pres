@@ -17,11 +17,16 @@ const Home = () => {
 
   return (
     <>
-        <div>
-            {operations.map((operation)=>{
-                return <Operations key={operation.id} monto={operation.monto} fecha={operation.fecha} 
-                tipo={operation.tipo}/>
-            })}
+        <div className='container'>
+          <div className='col p-2 '>
+            <div className='row flex-column d-flex justify-content-center d-flex align-items-center '>
+              <h3>Ultima actividad</h3>
+                {operations.map((operation)=>{
+                      return <Operations key={operation.id} monto={operation.monto} fecha={operation.fecha} 
+                      tipo={operation.tipo}/>
+                  })}
+            </div>
+          </div>
         </div>
     </>
   )
