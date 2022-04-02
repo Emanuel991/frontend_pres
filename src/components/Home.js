@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Operations from './Operations';
+import FormOperation from './FormOperation';
 import User from './User'
 
 const Home = () => {
@@ -7,6 +8,10 @@ const Home = () => {
     const [operations, setOperations] = useState([]);
 
   useEffect(()=>{
+    reload();
+  }, [])
+
+  const reload = () =>{
     fetch('http://localhost:4000/operations/lista_ultimas')
     .then((res) => res.json())
     .then((data) => {
@@ -14,12 +19,13 @@ const Home = () => {
         setOperations(data);
     })
     .catch((err) => {console.log('Data not found: ', err)})
-  }, [])
+  }
 
   return (
     <>
         <div className='container'>
         <User />
+        <FormOperation />  
           <div className='col-xl-12 col-lg-12 col-md-12 col-sm-12 '>
             <div className='row'>
               <h3>Ultima actividad</h3>
@@ -34,4 +40,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home;
