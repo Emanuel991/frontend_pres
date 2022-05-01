@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
+import { addOperation } from '../services/OperationService';
 
 export default function FormOperation()  {
 
   const [show, setShow] = useState(false);
-
   const [form, setForm] = useState({});
 
   const handleClose = () => setShow(false);
@@ -18,27 +18,15 @@ export default function FormOperation()  {
 
   const submit = e => {
     e.preventDefault()
-    fetch('http://localhost:4000/operations/nueva_operacion', {
-        method:"POST",
-        mode: 'cors',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'},
-        body: JSON.stringify(form)
-    })
-    .then(res => {
-        console.log(res)
-        return res.json()})
-    .catch((error)=>{
-        console.log(error)})
+    addOperation(form)
     alert('Operación realizada exitosamente')
     setShow(false)
-    window.location.reload();
+    
   }
 
   return (
     <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="success" className='m-5' onClick={handleShow}>
             Nueva Operación
         </Button>
 

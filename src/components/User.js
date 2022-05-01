@@ -1,29 +1,29 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useContext} from 'react'
+import UserContext from '../contexts/UserContext';
+import { getUser } from '../services/UserService'
+import FormOperation from './FormOperation';
 
 const User = () => {
   
-    const [user, setUser] = useState({})
+    const {user, setUser} = useContext(UserContext);
 
     useEffect(()=>{
-        fetch('http://localhost:4000/users/usuario/1')
-        .then((res)=> {return res.json()})
-        .then((data)=> {
-          console.log(data);
-          setUser(data);
+        getUser().then((data) => {
+          setUser(data)
         })
-        .catch((error) => {console.log(error)})
     },[]) 
 
   return (
     <>
-        <div className="card w-50 border-top-0 border-2 rounded">
-          <div className="card-body">
-              <h5 className="card-title">Saldo disponible</h5>
-            <div className='d-flex mt-3'>
-              <p className="card-text me-5"> monto: {user.saldo}$</p>
+          <div className="card">
+            <div className="card-body">
+                <h5 className="card-title">Saldo disponible</h5>
+              <div className='d-flex mt-3'>
+                <p className="card-text me-5"> monto: {JSON.stringify(user.saldo)}</p>
+              </div>
+              <FormOperation />
             </div>
           </div>
-        </div>
     </>
   )
 }
