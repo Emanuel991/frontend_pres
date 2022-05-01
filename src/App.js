@@ -1,20 +1,22 @@
 import Home from './components/Home'
-import {BrowserRouter as Router , Routes, Route} from 'react-router-dom'
-import Navbar from './components/Navbar';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import Navbar from './components/Navbar'
+import LoginForm from './components/LoginForm';
+import { UserProvider } from './contexts/UserContext';
 
 function App() {
   return (
-    <div className="App">
+    <UserProvider>
+      <div className="App">
        <Router>
-        <Navbar />
+       <Navbar />
         <Routes>
-            <Route exact path='/' component={Home}/>
-            
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={localStorage.getItem('token') ? <Navigate replace to='/' /> : <LoginForm />} />
         </Routes>
       </Router> 
-
-      <Home />
-    </div>
+      </div>
+    </UserProvider>
   );
 }
 
