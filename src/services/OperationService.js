@@ -21,7 +21,7 @@ export const addOperation = (form) => {
         body: JSON.stringify(form)
     })
     .then(res => {
-        console.log(res)
+        //console.log(res)
         return res.json()})
     .catch((error)=>{
         console.log(error)})

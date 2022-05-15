@@ -10,3 +10,15 @@ export const getUser = () => {
         .then((res)=> {return res.json()})
         .catch((error) => {console.log(error)})
 }
+
+export const register = (user) => {
+    return fetch(`${url}/new_user`, {
+        method: 'POST',
+        headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', },
+        body: JSON.stringify(user)
+    })
+    .then(res => res)
+    .catch(error => {console.log(error)})
+}
