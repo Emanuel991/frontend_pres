@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react'
 import {Button, Form} from 'react-bootstrap'
 import { Login } from '../services/AuthService';
 import {UserContext} from '../contexts/UserContext'
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import './Forms.css'
 
 const LoginForm = () => {
     
@@ -23,6 +24,7 @@ const LoginForm = () => {
         setForm({...form})
         Login({email,password})
          .then((data) => {
+            //  console.log(data)
             if(data === ""){
                 setForm({...form})
             }else{
@@ -38,8 +40,9 @@ const LoginForm = () => {
 
   return (
     <>
-        <div className='container'>
+        <div className='container-form position-absolute top-50 start-50 translate-middle'>
             <Form>
+                <h3>Iniciar sesión</h3>
                 <Form.Group className="mb-3">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" id='email' name='email' defaultValue={form.email} onChange={handleChange}  
@@ -51,6 +54,8 @@ const LoginForm = () => {
                             placeholder="Ingresar contraseña" />
                 </Form.Group>
                 <Button onClick={handleSubmit}>Submit</Button>
+                <br />
+                <NavLink to='/register'>no tienes una cuenta? registrate aquí</NavLink>
             </Form>
         </div>
     </>

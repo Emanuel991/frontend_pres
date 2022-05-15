@@ -21,7 +21,7 @@ const User = () => {
               <div className='d-flex mt-3'>
                 <p className="card-text me-5"> monto: {JSON.stringify(user.saldo)}</p>
               </div>
-              <FormOperation />
+              <FormOperation/>
             </div>
           </div>
     </>
