@@ -9,8 +9,6 @@ const Operations = (props) => {
             <div className='d-flex mt-3'>
               <p className="card-text me-5">{props.tipo} monto: $ {props.monto}</p>
               <div>
-                <button className='btn btn-primary py-1'>editar</button>
-                <button className='btn btn-danger'>borrar</button>
               </div>
             </div>
           </div>

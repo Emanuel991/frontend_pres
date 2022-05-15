@@ -1,31 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Operations from './Operations';
-import FormOperation from './FormOperation';
+//import FormOperation from './FormOperation';
 import User from './User'
 import { getOperations } from '../services/OperationService';
 import './Home.css'
 import Errors from './Errors';
+import UserContext from '../contexts/UserContext';
 
 const Home = () => {
   
-    const [operations, setOperations] = useState([]);
+    //const [operations, setOperations] = useState([]);
     const [error, setError] = useState(false);
+    const {operation, setOperation} = useContext(UserContext);
 
   useEffect(()=>{
-    reload();
-    //console.log('token: ', JSON.parse(token));
-  }, [])
-
-  const reload = () =>{
     getOperations()
     .then((data) => {
         if(data.error){
           setError(data.error)
         }else{
-          setOperations(data)
+          //console.log('data: ', data)
+          setOperation(data)
         }
     })
-  }
+  }, [operation])
+
+  // const reload = () =>{
+  //   getOperations()
+  //   .then((data) => {
+  //       if(data.error){
+  //         setError(data.error)
+  //       }else{
+  //         console.log('data: ', data)
+  //         setOperations(data)
+  //       }
+  //   })
+  // }
 
   return (
     <>
@@ -38,9 +48,10 @@ const Home = () => {
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-8 col-lg-6">
                 <h3>Ultima actividad</h3>
-                  {operations.map((operation)=>{
-                        return <Operations key={operation.id} monto={operation.monto} fecha={operation.fecha} 
-                        tipo={operation.tipo}/>
+                  {operation.map((op)=>{
+                        // console.log('operation: ' , op)
+                        return <Operations key={op.id} monto={op.monto} fecha={op.fecha} 
+                        tipo={op.tipo}/>
                     })}
               </div>
             </div>

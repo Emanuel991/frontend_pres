@@ -1,0 +1,11 @@
+.container-form{
+    padding: 2rem;
+    background-color: #FFFF;
+    border: #BDBDBD solid 1px;
+    width: 500px;
+    border-radius: 1rem;
+}
+
+.error{
+    color: red;
+}

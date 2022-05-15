@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
+import UserContext from '../contexts/UserContext';
 import { addOperation } from '../services/OperationService';
 
 export default function FormOperation()  {
 
   const [show, setShow] = useState(false);
   const [form, setForm] = useState({});
+  const {operation, setOperation} = useContext(UserContext);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -21,7 +23,10 @@ export default function FormOperation()  {
     addOperation(form)
     alert('Operación realizada exitosamente')
     setShow(false)
-    
+    setOperation([
+        ...operation,
+        form
+    ])
   }
 
   return (
